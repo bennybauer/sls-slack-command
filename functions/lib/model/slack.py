@@ -1,5 +1,6 @@
 import logging
 import os
+from enum import Enum
 
 __author__ = 'bauerb'
 
@@ -7,12 +8,26 @@ log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
 
+class SlackResponseType(Enum):
+    ephemeral = 'ephemeral'
+    in_channel = 'in_channel'
+
+slack_response_types = [SlackResponseType.ephemeral, SlackResponseType.in_channel]
+
+
 class SlackResponseMessage(object):
-    def __init__(self, text):
+    def __init__(self, text, response_type=SlackResponseType.ephemeral):
         self.text = text
 
+        if response_type in slack_response_types:
+            self.response_type = response_type
+        else:
+            self.response_type = SlackResponseType.ephemeral
+            log.warning(
+                "Invalid response_type {}. response_type was set to {}".format(response_type, self.response_type))
+
     def build(self):
-        return {'text': self.text}
+        return {'response_type': self.response_type, 'text': self.text}
 
 
 class SlackException(Exception):

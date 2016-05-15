@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 from urlparse import parse_qs
-from lib.model.slack import SlackOAuthResponse, SlackResponseMessage, SlackException, SlackCommand
+from lib.model.slack import SlackOAuthResponse, SlackResponseMessage, SlackException, SlackCommand, SlackResponseType
 
 __author__ = 'bauerb'
 
@@ -59,7 +59,18 @@ class TestSlack(TestCase):
     def test_slack_response_message(self):
         message = 'some text'
         response_message = SlackResponseMessage(message).build()
-        self.assertEqual({'text': message}, response_message)
+        self.assertEqual({'response_type': 'ephemeral', 'text': message}, response_message)
+
+    def test_slack_response_message_invalid_channel(self):
+        message = 'some text'
+        response_message = SlackResponseMessage(message).build()
+        self.assertEqual({'response_type': 'ephemeral', 'text': message}, response_message)
+
+    def test_slack_response_message_in_channel(self):
+        message = 'some text'
+        respone_type = SlackResponseType.in_channel
+        response_message = SlackResponseMessage(message, respone_type).build()
+        self.assertEqual({'response_type': 'in_channel', 'text': message}, response_message)
 
     # SlackException tests
     ######################
