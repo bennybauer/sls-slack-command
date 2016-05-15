@@ -12,6 +12,7 @@ class SlackResponseType(Enum):
     ephemeral = 'ephemeral'
     in_channel = 'in_channel'
 
+
 slack_response_types = [SlackResponseType.ephemeral, SlackResponseType.in_channel]
 
 
@@ -50,7 +51,7 @@ class SlackOAuthResponse(object):
 
 class SlackCommand(object):
     def __init__(self, body):
-        if not body.has_key('token'):
+        if 'token' not in body.keys():
             error = "Error: {}. Message: {}".format('Access denied', 'Token is missing')
             log.debug(error)
             raise SlackException(error)
