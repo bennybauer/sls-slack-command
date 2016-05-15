@@ -53,3 +53,5 @@ class SlackCommand(object):
         self.text = body['text'][0]
         self.user_id = body['user_id'][0]
         self.user_name = body['user_name'][0]
+        self.channel_name = body['channel_name'][0]
+        self.channel_id = body['channel_id'][0]
