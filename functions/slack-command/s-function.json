@@ -45,11 +45,7 @@
     "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
     "SERVERLESS_REGION": "${region}",
-    "SLACK_VERIFICATION_TOKEN": "${slackVerificationToken}",
-    "AWS_KEY": "${awsKey}",
-    "AWS_SECRET": "${awsSecret}",
-    "WORK_QUEUE_NAME": "${workQueueName}",
-    "REST_QUEUE_NAME": "${restQueueName}"
+    "SLACK_VERIFICATION_TOKEN": "${slackVerificationToken}"
   },
   "vpc": {
     "securityGroupIds": [],
